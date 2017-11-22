@@ -1,0 +1,198 @@
+! parallel_plate.sif
+!
+! ElmerSolver input file for parallel plate geometry.
+!
+! This is a modified version of "elstatics.sif" from the Elmer tutorials.
+! (see ElmerTutorials manual, Tutorial 14)
+!
+Check Keywords Warn
+
+! Specify output folder and location.
+Header
+  Mesh DB "." "parallel_plate"
+End
+
+! Details of the calculation and output files.
+Simulation
+  Coordinate System = Cartesian 3D
+  Simulation Type = Steady State
+  Steady State Max Iterations = 1
+  Output File = "parallel_plate.result"
+  Post File = "parallel_plate.ep"
+End
+
+! Define constants.
+Constants
+  Permittivity Of Vacuum = 8.8542e-12
+End
+
+! Specify equation and material for gas.
+Body 1
+  Equation = 1
+  Material = 1
+End
+
+Body 2
+  Equation = 1
+  Material = 2
+End
+
+! Define the gas material.
+Material 1
+  Relative Permittivity = 1
+End
+
+! Define the metal material.
+Material 2
+  Relative Permittivity = 10000000000
+End
+
+! Bottom ring
+Boundary Condition 1
+  Target Boundaries = 1
+  Potential = 100
+End
+
+Boundary Condition 2
+  Target Boundaries = 2
+  Potential = 200
+End
+
+Boundary Condition 3
+  Target Boundaries = 3
+  Potential = 300
+End
+
+Boundary Condition 4
+  Target Boundaries = 4
+  Potential = 400
+End
+
+Boundary Condition 5
+  Target Boundaries = 5
+  Potential = 500
+End
+
+Boundary Condition 6
+  Target Boundaries = 6
+  Potential = 600
+End
+
+Boundary Condition 7
+  Target Boundaries = 7
+  Potential = 700
+End
+
+Boundary Condition 8
+  Target Boundaries = 8
+  Potential = 800
+End
+
+Boundary Condition 9
+  Target Boundaries = 9
+  Potential = 900
+End
+
+Boundary Condition 10
+  Target Boundaries = 10
+  Potential = 1000
+End
+
+Boundary Condition 11
+  Target Boundaries = 11
+  Potential = 1100
+End
+
+Boundary Condition 12
+  Target Boundaries = 12
+  Potential = 1200
+End
+
+Boundary Condition 13
+  Target Boundaries = 13
+  Potential = 1300
+End
+
+Boundary Condition 14
+  Target Boundaries = 14
+  Potential = 1400
+End
+
+Boundary Condition 15
+  Target Boundaries = 15
+  Potential = 1500
+End
+
+Boundary Condition 16
+  Target Boundaries = 16
+  Potential = 1600
+End
+
+Boundary Condition 17
+  Target Boundaries = 17
+  Potential = 1700
+End
+
+Boundary Condition 18
+  Target Boundaries = 18
+  Potential = 1800
+End
+
+Boundary Condition 19
+  Target Boundaries = 19
+  Potential = 1900
+End
+
+Boundary Condition 20
+  Target Boundaries = 20
+  Potential = 2000
+End
+
+Boundary Condition 21
+  Target Boundaries = 21
+  Potential = 2100
+End
+
+
+Boundary Condition 22
+  Target Boundaries = 22
+  Potential = 2200
+End
+
+Boundary Condition 23
+  Target Boundaries = 23
+  Potential = 0
+End
+
+Boundary Condition 24
+  Target Boundaries = 24
+  Potential = 100
+End
+
+Boundary Condition 25
+  Target Boundaries = 25
+  Potential = 0
+End
+
+! Details of the calculation procedure: all that must
+! be calculated is the potential.
+Equation 1
+  Active Solvers(1) = 1
+  Calculate Electric Energy = True
+End
+
+Solver 1
+  Equation = Stat Elec Solver
+  Variable = Potential
+  Variable DOFs = 1
+  Procedure = "StatElecSolve" "StatElecSolver"
+  Calculate Electric Field = True
+  Calculate Electric Flux = False
+  Linear System Solver = Iterative
+  Linear System Iterative Method = BiCGStab
+  Linear System Max Iterations = 1000
+  Linear System Abort Not Converged = True
+  Linear System Convergence Tolerance = 1.0e-10
+  Linear System Preconditioning = ILU1
+  Steady State Convergence Tolerance = 5.0e-7
+End
